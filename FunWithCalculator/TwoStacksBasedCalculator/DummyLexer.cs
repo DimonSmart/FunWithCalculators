@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using FunWithCalculator.RegexBasedCalculator;
 
 namespace FunWithCalculator.TwoStacksBasedCalculator
 {
@@ -15,7 +16,7 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
             return Parse(s, Regex.Escape(target), out length);
         }
 
-        public static string Parse(string s, string target,  out int length)
+        public static string Parse(string s, string target, out int length)
         {
             Regex regex = new Regex($@"^\s*(?<value>{target})\s*");
             var result = regex.Match(s);

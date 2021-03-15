@@ -1,12 +1,12 @@
-﻿namespace FunWithCalculator
+﻿namespace FunWithCalculator.RegexBasedCalculator
 {
     public class Number
     {
-        public bool IsInteger { get; set; }
-        public double DoubleValue { get; set; }
-        public int IntValue { get; set; }
+        private bool IsInteger { get; set; }
+        private double DoubleValue { get; set; }
+        private int IntValue { get; set; }
 
-        public double AsDouble()
+        private double AsDouble()
         {
             if (IsInteger)
             {
@@ -34,7 +34,7 @@
             };
         }
 
-        internal static Number FromValue(int value)
+        private static Number FromValue(int value)
         {
             return new Number
             {
@@ -43,7 +43,7 @@
             };
         }
 
-        internal static Number FromValue(double value)
+        private static Number FromValue(double value)
         {
             return new Number
             {

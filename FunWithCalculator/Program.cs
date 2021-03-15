@@ -3,15 +3,15 @@ using System.Text.RegularExpressions;
 
 namespace FunWithCalculator
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            var calculator = new RegexBasedCalculator
+            var calculator = new RegexBasedCalculator.RegexBasedCalculator
             {
                 Step = PrintStep
             };
-            var result = calculator.Calculate("2 + 2 / 2");
+            var result = calculator.Calculate(args[0]);
             Console.WriteLine($"={result}");
         }
 

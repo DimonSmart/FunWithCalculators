@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RegexBasedCalculator\Calculator.cs" />
-    <Compile Include="RegexBasedCalculator\ICalculator.cs" />
+    <Compile Include="Common\ICalculator.cs" />
     <Compile Include="RegexBasedCalculator\Number.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,5 @@
-using FunWithCalculator;
+using FunWithCalculator.RegexBasedCalculator;
 using FunWithCalculator.TwoStacksBasedCalculator;
-using System;
 using Xunit;
 
 namespace FunWithCalculatorTests
