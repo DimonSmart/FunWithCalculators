@@ -96,5 +96,27 @@
             }
             return DoubleValue.ToString("N2");
         }
+
+        public override bool Equals(object obj)
+        {
+            return this.Equals(obj as Number);
+        }
+
+
+        protected bool Equals(Number other)
+        {
+            return IsInteger == other.IsInteger && DoubleValue.Equals(other.DoubleValue) && IntValue == other.IntValue;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = IsInteger.GetHashCode();
+                hashCode = (hashCode * 397) ^ DoubleValue.GetHashCode();
+                hashCode = (hashCode * 397) ^ IntValue;
+                return hashCode;
+            }
+        }
     }
 }

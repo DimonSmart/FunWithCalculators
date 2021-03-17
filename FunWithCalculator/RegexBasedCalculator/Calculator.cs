@@ -13,11 +13,14 @@ namespace FunWithCalculator.RegexBasedCalculator
             = new List<RegexWithEvaluator>
             {
                 new RegexWithEvaluator(@"(?i)\s*SIN\s*\(\s*(?<number>-?\d+\.?\d*)\s*\)\s*", Sin),
-                new RegexWithEvaluator(@"\s*\(\s*(?<number>-?\d*\.?\d*)\s*\)\s*", RemoveBrackets),
+                new RegexWithEvaluator(@"(?i)\s*PI\s*", Pi),
+                new RegexWithEvaluator(@"\s*\(\s*(?<number>-?\d+\.?\d*)\s*\)\s*", RemoveBrackets),
+                new RegexWithEvaluator(@"\s*(?![\s*/])\s*(?<numberA>-?\d+\.?\d*)\s*\+\s*(?<numberB>-?\d+\.?\d*)\s*(?![\s*/])\s*", Sum),
+                new RegexWithEvaluator(@"\s*(?![\s*/])\s*(?<numberA>-?\d+\.?\d*)\s*\-\s*(?<numberB>-?\d+\.?\d*)\s*(?![\s*/])\s*", Sub),
                 new RegexWithEvaluator(@"\s*(?<numberA>-?\d+\.?\d*)\s*\*\s*(?<numberB>-?\d+\.?\d*)\s*", Mul),
                 new RegexWithEvaluator(@"\s*(?<numberA>-?\d+\.?\d*)\s*\/\s*(?<numberB>-?\d+\.?\d*)\s*", Div),
-                new RegexWithEvaluator(@"(?i)\s*PI\s*", Pi),
-                new RegexWithEvaluator(@"\s*(?<numberA>-?\d+\.?\d*)\s*\+\s*(?<numberB>-?\d+\.?\d*)\s*", Sum)
+                new RegexWithEvaluator(@"\s*(?<numberA>-?\d+\.?\d*)\s*\+\s*(?<numberB>-?\d+\.?\d*)\s*", Sum),
+                new RegexWithEvaluator(@"\s*(?<numberA>-?\d+\.?\d*)\s*\+\s*(?<numberB>-?\d+\.?\d*)\s*", Sub)
             };
 
         public Stage Step;
@@ -51,39 +54,49 @@ namespace FunWithCalculator.RegexBasedCalculator
         {
             return d.ToString("F2");
         }
+        private static string MakeResult(Match match, string s, string result)
+        {
+            return s.Substring(0, match.Index) + result + s.Substring(match.Index + match.Length);
+        }
 
         private static string RemoveBrackets(Match match, string s)
         {
-            return Regex.Replace(s, Regex.Escape(match.Value), match.Groups["number"].Value);
+            return MakeResult(match, s, match.Groups["number"].Value);
         }
 
         private static string Sum(Match match, string s)
         {
             var result = Number.Create(match.Groups["numberA"].Value) + Number.Create(match.Groups["numberB"].Value);
-            return Regex.Replace(s, Regex.Escape(match.Value), result.ToString());
+            return MakeResult(match, s, result.ToString());
+        }
+
+        private static string Sub(Match match, string s)
+        {
+            var result = Number.Create(match.Groups["numberA"].Value) - Number.Create(match.Groups["numberB"].Value);
+            return MakeResult(match, s, result.ToString());
         }
 
         private static string Mul(Match match, string s)
         {
             var result = Number.Create(match.Groups["numberA"].Value) * Number.Create(match.Groups["numberB"].Value);
-            return Regex.Replace(s, Regex.Escape(match.Value), result.ToString());
+            return MakeResult(match, s, result.ToString());
         }
 
         private static string Div(Match match, string s)
         {
             var result = Number.Create(match.Groups["numberA"].Value) / Number.Create(match.Groups["numberB"].Value);
-            return Regex.Replace(s, Regex.Escape(match.Value), result.ToString());
+            return MakeResult(match, s, result.ToString());
         }
 
         private static string Sin(Match match, string s)
         {
             var result = Math.Sin(double.Parse(match.Groups["number"].Value));
-            return Regex.Replace(s, Regex.Escape(match.Value), Format(result));
+            return MakeResult(match, s, Format(result));
         }
 
         private static string Pi(Match match, string s)
         {
-            return Regex.Replace(s, Regex.Escape(match.Value), Format(Math.PI));
+            return MakeResult(match, s, Format(Math.PI));
         }
     }
 }

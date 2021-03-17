@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FunWithCalculator.Common;
 using FunWithCalculator.RegexBasedCalculator;
 
@@ -7,8 +8,8 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
 {
     public class TwoStacksCalculator : ICalculator
     {
-        Stack<Number> _values;
-        Stack<char> _operations;
+        private Stack<Number> _values;
+        private Stack<char> _operations;
         public Number Calculate(string expression)
         {
             _values = new Stack<Number>();
@@ -48,15 +49,14 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
                     continue;
                 }
 
-                var operation = DummyLexer.Parse(restOfExpression, @"\+|\-|\*|\/", out tokenLength);
-                if (operation != null)
+                var operation = DummyLexer.Parse(restOfExpression, @"\+|\-|\*|\/", out tokenLength).FirstOrDefault();
+                if (operation != 0)
                 {
-                    var op = operation[0];
-                    while (_operations.Count > 0 && Precedence.IsPrecided(op, _operations.Peek()))
+                    while (_operations.Count > 0 && Precedence.IsPrecided(operation, _operations.Peek()))
                     {
                         _values.Push(Calculate(_operations.Pop(), _values.Pop(), _values.Pop()));
                     }
-                    _operations.Push(op);
+                    _operations.Push(operation);
                     i += tokenLength;
                 }
             }
@@ -66,7 +66,13 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
                 _values.Push(Calculate(_operations.Pop(), _values.Pop(), _values.Pop()));
             }
 
-            return _values.Pop();
+            var result = _values.Pop();
+            if (_values.Any() || _operations.Any())
+            {
+                throw new InvalidOperationException();
+            }
+
+            return result;
         }
 
         private static Number Calculate(char op, Number b, Number a)

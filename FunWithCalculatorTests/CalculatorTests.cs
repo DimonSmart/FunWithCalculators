@@ -21,7 +21,7 @@ namespace FunWithCalculatorTests
         [InlineData("-2.0 + 2", "0.00")]
         [InlineData("Pi", "3.14")]
         [InlineData("-Pi", "-3.14")]
-
+        [InlineData("2 + 2 * (2 + 2)", "10")]
         public void RegexBasedCalculatorTests(string expression, string expectedResult)
         {
             var calculator = new RegexBasedCalculator();
@@ -42,7 +42,6 @@ namespace FunWithCalculatorTests
         [InlineData("2 + -2", "0")]
         [InlineData("-2 + 2", "0")]
         [InlineData("-2.0 + 2", "0.00")]
-
         public void TwoStacksBasedCalculatorTests(string expression, string expectedResult)
         {
             var calculator = new TwoStacksCalculator();
