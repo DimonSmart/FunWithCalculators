@@ -3,14 +3,12 @@ using System.Text.RegularExpressions;
 
 namespace FunWithCalculator
 {
-    static class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var calculator = new RegexBasedCalculator.RegexBasedCalculator
-            {
-                Step = PrintStep
-            };
+            var calculator = new RegexBasedCalculator.RegexBasedCalculator();
+            calculator.OnEvaluationStage += PrintStep;
             var result = calculator.Calculate(args[0]);
             Console.WriteLine($"={result}");
         }

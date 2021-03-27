@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RegexBasedCalculator\Calculator.cs" />
+    <Compile Include="RegexBasedCalculator\RegexBasedCalculator.cs" />
     <Compile Include="Common\ICalculator.cs" />
+    <Compile Include="Common\CalculatorBase.cs" />
     <Compile Include="RegexBasedCalculator\Number.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

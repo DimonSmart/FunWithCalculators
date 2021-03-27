@@ -1,8 +1,8 @@
+using FunWithCalculator.RegexBasedCalculator;
+using FunWithCalculator.TwoStacksBasedCalculator;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using FunWithCalculator.RegexBasedCalculator;
-using FunWithCalculator.TwoStacksBasedCalculator;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -40,8 +40,7 @@ namespace FunWithCalculatorTests
                 sb.Append(" ");
             }
 
-            var expr = sb.ToString();
-            return expr;
+            return sb.ToString();
         }
 
         [Fact]
@@ -54,7 +53,7 @@ namespace FunWithCalculatorTests
         // (( 5 * 7 ) )  = 35
         public void RandomExpressionEvaluator()
         {
-            var samplesCount = 5;
+            var samplesCount = 50;
             var c = 0;
             do
             {

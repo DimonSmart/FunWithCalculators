@@ -1,16 +1,16 @@
-﻿using System;
+﻿using FunWithCalculator.Common;
+using FunWithCalculator.RegexBasedCalculator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using FunWithCalculator.Common;
-using FunWithCalculator.RegexBasedCalculator;
 
 namespace FunWithCalculator.TwoStacksBasedCalculator
 {
-    public class TwoStacksCalculator : ICalculator
+    public class TwoStacksCalculator : CalculatorBase
     {
         private Stack<Number> _values;
         private Stack<char> _operations;
-        public Number Calculate(string expression)
+        public override Number Calculate(string expression)
         {
             _values = new Stack<Number>();
             _operations = new Stack<char>();

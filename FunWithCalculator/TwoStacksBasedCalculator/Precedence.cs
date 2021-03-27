@@ -4,7 +4,7 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
 {
     public static class Precedence
     {
-        private static readonly IDictionary<char, int> operationPriority = new Dictionary<char, int>
+        private static readonly IDictionary<char, int> OperationPriority = new Dictionary<char, int>
             {
                { '*', 3 },
                { '/', 3 },
@@ -16,7 +16,7 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
 
         public static bool IsPrecided(char operationA, char operationB)
         {
-            return operationPriority[operationA] < operationPriority[operationB];
+            return OperationPriority[operationA] <= OperationPriority[operationB];
         }
     }
 }

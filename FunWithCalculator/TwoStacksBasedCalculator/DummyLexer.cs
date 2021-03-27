@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using FunWithCalculator.RegexBasedCalculator;
+﻿using FunWithCalculator.RegexBasedCalculator;
+using System.Text.RegularExpressions;
 
 namespace FunWithCalculator.TwoStacksBasedCalculator
 {
@@ -7,7 +7,7 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
     {
         public static Number Parse(string s, out int length)
         {
-            var value = Parse(s, @"[-+]?[0-9]+(?:\.[0-9]+)?", out length);
+            var value = Parse(s, @"^\d+(?:\.\d+)?", out length);
             return value == null ? null : Number.Create(value);
         }
 
@@ -18,7 +18,7 @@ namespace FunWithCalculator.TwoStacksBasedCalculator
 
         public static string Parse(string s, string target, out int length)
         {
-            Regex regex = new Regex($@"^\s*(?<value>{target})\s*");
+            var regex = new Regex($@"^\s*(?<value>{target})\s*");
             var result = regex.Match(s);
             if (!result.Success)
             {
