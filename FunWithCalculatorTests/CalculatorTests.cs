@@ -16,7 +16,8 @@ namespace FunWithCalculatorTests
         }
 
         [Theory]
-        [InlineData("8 3 + - ( 9 )","2")]
+        [InlineData("4* 2 + 2", "10")]
+        [InlineData("8 3 + - ( 9 )", "2")]
         [InlineData("(Sin(Pi))+1", "1.00")]
         [InlineData("2 + 2", "4")]
         [InlineData("2.0 + 2", "4.00")]
@@ -49,6 +50,7 @@ namespace FunWithCalculatorTests
         }
 
         [Theory]
+        [InlineData("4* 2 + 2", "10")]
         [InlineData("8 3 + - ( 9 )", "2")]
         // [InlineData("(Sin(Pi))+1", "1.00")]
         [InlineData("2 + 2", "4")]
